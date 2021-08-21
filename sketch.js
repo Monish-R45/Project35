@@ -17,6 +17,10 @@ function setup() {
   balloon=createSprite(250,450,150,150);
   balloon.addAnimation("hotAirBalloon",balloonImage1);
   balloon.scale=0.5;
+   
+  var balloonPosition = database.ref('balloon/height')
+  balloonPosition.on("value",readHeight, showError)
+
 
   textSize(20); 
 }
@@ -26,9 +30,7 @@ function draw() {
   background(bg);
 
 
-  var balloonPosition = database.ref('balloon/height')
-  balloonPosition.on("value",readHeight, showError)
-
+  
   if(keyDown(LEFT_ARROW)){
     balloon.addAnimation("hotAirBalloon",balloonImage2);
     updateHeight(-10,0)
